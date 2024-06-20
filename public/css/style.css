@@ -1,0 +1,51 @@
+.fade-out {
+    animation: fadeOut 7s ease;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+
+/* .day.today {
+    background-color: #007bff;
+    color: white;
+    border-radius: 50%;
+} */
+
+.nav .nav-item .nav-treeview a{
+    padding-left: 30px;
+}
+
+.nav .nav-item .nav-treeview ul a{
+    padding-left: 50px;
+}
+
+#messages {
+    max-height: 45vh; /* Chiều cao tối đa */
+    overflow-y: auto; /* Cho phép cuộn khi nội dung vượt quá */
+}
+
+#messages span{
+    max-width: 60%;
+}
+
+/* CSS để đặt vị trí của phần tử */
+#messagealertsend {
+    position: fixed;
+    bottom: 10px; /* Khoảng cách từ phía dưới cùng */
+    right: 10px; /* Khoảng cách từ phía bên phải cùng */
+    z-index: 1000; /* Độ sâu của lớp */
+    transition: right 0.3s ease;
+    max-width: 40vh;
+}
+
+.max-width-60{
+    max-width: 60%;
+}
+
