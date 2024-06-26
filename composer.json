@@ -10,11 +10,11 @@
         "barryvdh/laravel-dompdf": "^2.2",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.10",
-        "laravel/octane": "*",
+        "laravel/octane": "^2.4",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
         "laravel/ui": "*",
-        "pusher/pusher-php-server": "*",
+        "pusher/pusher-php-server": "^7.2",
         "tymon/jwt-auth": "^2.1"
     },
     "require-dev": {

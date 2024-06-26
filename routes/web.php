@@ -56,14 +56,7 @@ Route::get('xacnhan/{id}/{token}', [LoginController::class, 'accept'])->name('xa
 Route::post('doimatkhau/{id}', [LoginController::class, 'changPass'])->name('doimatkhau'); 
 //end lấy lại mật khẩu
 
-// profile
-Route::get('profile', [ProfileController::class, 'index']); 
-Route::get('profile/edit', [ProfileController::class, 'edit']); 
-Route::post('profile/edit', [ProfileController::class, 'update']); 
-Route::get('profile/editpass', [ProfileController::class, 'editPass']); 
-Route::post('profile/editpass', [ProfileController::class, 'authPass']); 
-Route::get('/profile/editimage', [ProfileController::class, 'changImage']);
-Route::post('/profile/editimage', [ProfileController::class, 'updateImage']);
+
 // Route::get('profile/test/edit', [ProfileController::class, 'update']); 
 
 
@@ -73,6 +66,16 @@ Route::middleware(['auth','rule.user'])->group(function () {
     // Route::get('/chat', function (){
     //     return view('chat.view');
     // });
+    // profile
+    Route::get('profile', [ProfileController::class, 'index']); 
+    Route::get('profile/edit', [ProfileController::class, 'edit']); 
+    Route::post('profile/edit', [ProfileController::class, 'update']); 
+    Route::get('profile/editpass', [ProfileController::class, 'editPass']); 
+    Route::post('profile/editpass', [ProfileController::class, 'authPass']); 
+    Route::get('/profile/editimage', [ProfileController::class, 'changImage']);
+    Route::post('/profile/editimage', [ProfileController::class, 'updateImage']);
+
+    // chat
     Route::get('/chat', [ChatController::class, 'chatShow'])->name('chat.show');
     Route::post('/chat/message', [ChatController::class, 'messageReceived']);
     // Route::post('/chat/message/send',[ChatController::class,'store']);
@@ -87,6 +90,7 @@ Route::middleware(['auth','rule.user'])->group(function () {
             Route::post('add',[NhanVienController::class,'store']);
 
             Route::get('List',[NhanVienController::class,'index']);
+            Route::get('List/search',[NhanVienController::class,'searchByName']);
             Route::get('List/export',[NhanVienController::class,'export']);//Excel
             Route::get('List/export-pdf',[NhanVienController::class,'exportPDF']);//PDF
 

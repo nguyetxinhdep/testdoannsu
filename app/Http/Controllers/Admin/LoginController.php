@@ -80,6 +80,7 @@ class LoginController extends Controller
         ]);
 
         $mailkh = $req->input('email');
+        // dd($mailkh);
 
         $user = User::where('email', $mailkh)->first();
         $token = Str::random(40);
