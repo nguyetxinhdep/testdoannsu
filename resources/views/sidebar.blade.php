@@ -394,7 +394,38 @@
                   </a>
                 </li>
 
+                <li class="nav-item">
+                  <form action="{{url('/vnpay_payment')}}" class="m-0" method="post">
+                      @csrf
+                      <button type="submit" name="redirect" class="nav-link">
+                        
+                        <p>Thanh toán VNPay</p>
+                        <span id="unreadMessages" class="rounded-circle bg-danger p-1 ml-3 d-none" style="font-size:12px"></span>
+                      </button>
+                   </form>
+                </li>
 
+                <li class="nav-item">
+                  <form action="{{url('/momo_payment')}}" class="m-0" method="post">
+                      @csrf
+                      <button type="submit" name="payUrl" class="nav-link">
+                        
+                        <p>Thanh toán MOMO bằng TK NH</p>
+                        <span id="unreadMessages" class="rounded-circle bg-danger p-1 ml-3 d-none" style="font-size:12px"></span>
+                      </button>
+                   </form>
+                </li>
+
+                <li class="nav-item">
+                  <form action="{{url('momo_paymentQR')}}" class="m-0" method="post">
+                      @csrf
+                      <button type="submit" name="payUrl" class="nav-link">
+                        
+                        <p>Thanh toán MOMO QR Code</p>
+                        <span id="unreadMessages" class="rounded-circle bg-danger p-1 ml-3 d-none" style="font-size:12px"></span>
+                      </button>
+                   </form>
+                </li>
                 
           </ul>
       </nav>

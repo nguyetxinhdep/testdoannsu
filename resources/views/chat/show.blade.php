@@ -1,5 +1,13 @@
 @extends('main')
 
+@push('styles')
+    <style>
+        #users > li {
+            cursor: pointer;
+        }
+    </style>
+@endpush
+
 @section('content')
 <div class="container-fluid mt-2">
     <div class="row justify-content-center">
@@ -56,6 +64,9 @@
         </div>
     </div>
 </div>
+<ul id ="testchat">
+    <li>CHat</li>
+</ul>
 @endsection
 
 @push('scripts')
@@ -73,6 +84,7 @@
                 users.forEach((user, index) =>{
                     const element = document.createElement('li');
                     element.setAttribute('id', user.id)
+                    element.setAttribute('onclick', `greetUser("${user.id}")`)
                     element.innerText = user.name;
 
                     userElement.appendChild(element);
@@ -81,6 +93,7 @@
             .joining((user) => {
                 const element = document.createElement('li');
                 element.setAttribute('id', user.id)
+                element.setAttribute('onclick', `greetUser("${user.id}")`)
                 element.innerText = user.name;
 
                 userElement.appendChild(element);
@@ -152,6 +165,27 @@
         });
 
     </script>
+
+    {{-- greeting chat --}}
+    <script>
+        function greetUser(id){
+            window.axios.post('/chat/greet/'+id);
+        }
+    </script>
+
+    <script type="module">
+
+        const messagesElement = document.getElementById('testchat')
+        console.log('chat.greet.{{auth()->user()->id}}')
+        Echo.private('chat.greet.{{auth()->user()->id}}')
+            .listen('GreetingSent', (e) => {
+                const element = document.createElement('li')
+                element.innerText = e.message
+                element.classList.add('text-success')
+
+                messagesElement.appendChild(element)
+            })
+    </script>
 @endpush
 
 <!-- Đoạn mã jQuery -->
@@ -199,3 +233,5 @@
         });
     });
 </script>
+
+

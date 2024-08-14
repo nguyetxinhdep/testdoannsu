@@ -10,7 +10,7 @@
 <!-- Theme style -->
 <link rel="stylesheet" href="/template/dist/css/adminlte.min.css">
 <link rel="stylesheet" href="/css/style.css">
-
+@stack('styles')
 
 
 <meta name="csrf-token" content="{{ csrf_token() }}">

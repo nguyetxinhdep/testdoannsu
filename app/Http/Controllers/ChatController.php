@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\GreetingSent;
 use App\Events\MessageSend;
 use App\Models\Message;
 use App\Models\User;
@@ -38,6 +39,7 @@ class ChatController extends Controller
     }
 
     public function messageReceived(Request $request){
+        // dd(123);
         $rules = [
             'message' => 'required',
         ];
@@ -55,5 +57,14 @@ class ChatController extends Controller
         $x = $request->user()->id;
         Log::debug("Message sent".$x . ' ' . $request->message);
         return response()->json('Message broadcast');
+    }
+
+    public function greetReceived(Request $request, User $receiver){
+        // dd($receiver);
+        broadcast(new GreetingSent($receiver, "{$request->user()->name} đã chào bạn"));
+        broadcast(new GreetingSent($request->user(), "Bạn đã chào {$receiver->name}"));
+        // dd(1234);
+
+        return "Lời chào từ {$request->user()->name} đến {$receiver->name}";
     }
 }

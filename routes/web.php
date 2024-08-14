@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\QuyetDinhLuongController;
 use App\Http\Controllers\Admin\SoBaoHiemCotroller;
 use App\Http\Controllers\Admin\ThongTinChamCongController;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\checkoutController;
 use App\Http\Controllers\KhenThuong_KyLuatCaNhanController;
 use App\Http\Controllers\KhenThuong_KyLuatTapTheController;
 use App\Http\Controllers\QuyetDinhKhenThuong_KyLuatController;
@@ -40,9 +41,10 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('home');
 // });
-
-Route::get('admin/login', [LoginController::class, 'index'])->name('login'); //đặt tên route là login cho thuận tiện
-Route::post('admin/login/store', [LoginController::class, 'store']); 
+Route::middleware('guest')->group(function () {
+    Route::get('admin/login', [LoginController::class, 'index'])->name('login'); //đặt tên route là login cho thuận tiện
+    Route::post('admin/login/store', [LoginController::class, 'store']); 
+});
 Route::get('admin/logout', [LoginController::class, 'logout'])->name('logout');
  //đặt tên route là logout cho thuận tiện
 
@@ -59,10 +61,19 @@ Route::post('doimatkhau/{id}', [LoginController::class, 'changPass'])->name('doi
 
 // Route::get('profile/test/edit', [ProfileController::class, 'update']); 
 
-
+Route::get('/testicon', function () {
+    return view('chat.test'); // Trả về view 'yeucauthanhcong'
+})->name('yeucauthanhcong');
 
 Route::middleware(['auth','rule.user'])->group(function () {
     Route::get('/', [MainController::class, 'index'])->name('admin');
+
+    Route::post('/vnpay_payment', [checkoutController::class, 'vnpay_payment']);
+    Route::post('/momo_payment', [checkoutController::class, 'momo_payment']);
+    Route::post('/momo_paymentQR', [checkoutController::class, 'paymomo']);
+    // Route để xử lý kết quả thanh toán từ MoMo
+    Route::post('/momo-return', [checkoutController::class, 'momoReturn'])->name('momo.return');
+
     // Route::get('/chat', function (){
     //     return view('chat.view');
     // });
@@ -78,6 +89,7 @@ Route::middleware(['auth','rule.user'])->group(function () {
     // chat
     Route::get('/chat', [ChatController::class, 'chatShow'])->name('chat.show');
     Route::post('/chat/message', [ChatController::class, 'messageReceived']);
+    Route::post('/chat/greet/{receiver}', [ChatController::class, 'greetReceived'])->name('chat.greet');
     // Route::post('/chat/message/send',[ChatController::class,'store']);
 
     Route::prefix('admin')->group(function () {
